@@ -14,13 +14,6 @@ pipeline {
                     }
                 }
               }
-        stage('Deploy our image') {
-           steps{
-                withDockerRegistry([credentialsId: 'Docker-id']) {
-                    
-                    sh "docker push :${env.BUILD_ID}"
-                }
-            }
-                   }
+       
             }
     }
