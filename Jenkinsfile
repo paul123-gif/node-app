@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        
+        registry = "https://hub.docker.com/repository/docker/paul1199/kubernetes"
         registryCredential = 'Docker-id'
         
     }
