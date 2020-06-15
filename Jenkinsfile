@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment{
         DOCKER_TAG = getDockerTag()
-        DOCKER_URL  = "https://index.docker.io/"
+        DOCKER_URL  = "https://index.docker.io"
         IMAGE_URL_WITH_TAG = "${DOCKER_URL}/node-app:${DOCKER_TAG}"
     }
     stages{
