@@ -1,24 +1,28 @@
 pipeline {
     agent any
-    environment{
-        DOCKER_TAG = getDockerTag()
-        IMAGE_URL_WITH_TAG = "/node-app:${DOCKER_TAG}"
+    environment {
+        registry = "https://hub.docker.com/repository/docker/paul1199/node-app"
+        registryCredential = 'Docker-id'
+        dockerImage = ''
     }
     stages{
-        stage('Build Docker Image'){
+        stage('Building our image') {
             steps{
-                sh "docker build . -t ${IMAGE_URL_WITH_TAG}"
-            }
-        }
-        stage('Docker Push'){
-            steps{
-                withCredentials([string(credentialsId: 'Docker-id', variable: 'Dockerid')]) {
-                    sh "docker login -u paul1199 -p ${Docker-id}"
-                    sh "docker push ${IMAGE_URL_WITH_TAG}"
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    }
                 }
+              }
+        stage('Deploy our image') {
+            steps{
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
+                        }
+                       }
+                    }
+                   }
             }
-        }
-}
     }
 
 def getDockerTag(){
