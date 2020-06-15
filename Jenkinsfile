@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        registry = "https://hub.docker.com/repository/docker/paul1199/node-app"
+        registry = "https://hub.docker.com/r/docker/paul1199/node-app"
         registryCredential = 'Docker-id'
         dockerImage = ''
     }
