@@ -9,7 +9,7 @@ pipeline {
         stage('Building our image') {
             steps{
                 script {
-                    sh "docker build . -t paul1199/node-app:${env.BUILD_ID}"
+                    sh "docker build . -t :${env.BUILD_ID}"
                     }
                 }
               }
@@ -17,7 +17,7 @@ pipeline {
            steps{
                 withDockerRegistry([credentialsId: 'Docker-id', url: 'https://hub.docker.com/repository/docker/paul1199/node-app']) {
                     
-                    sh "docker push paul1199/node-app:${env.BUILD_ID}"
+                    sh "docker push :${env.BUILD_ID}"
                 }
             }
                    }
