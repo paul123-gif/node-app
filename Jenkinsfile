@@ -15,7 +15,7 @@ pipeline {
               }
         stage('Deploy our image') {
            steps{
-                withCredentials([string(credentialsId: 'Docker-id', variable: 'dockerPwd')]) {
+                withCredentials([string(credentialsId: 'registryCredential', variable: 'dockerPwd')]) {
                     sh "docker login -u paul1199 -p ${dockerPwd}"
                     sh "docker push paul1199/node-app:${env.BUILD_ID}"
                 }
