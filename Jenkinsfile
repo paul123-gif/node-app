@@ -10,7 +10,7 @@ pipeline {
             steps{
                 script {
                     def customImage = docker.build("${env.BUILD_ID}")
-                    withDockerRegistry([ credentialsId: "Docker-id", url: "https://hub.docker.com/repository/docker/paul1199/node-app" ]) {
+                    withDockerRegistry([ credentialsId: "Docker-id", url: "index.docker.io" ]) {
       // following commands will be executed within logged docker registry
                     sh 'docker push customImage'
    }
