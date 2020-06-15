@@ -17,14 +17,9 @@ pipeline {
            steps{
                 withDockerRegistry([credentialsId: 'Docker-id', url: 'https://hub.docker.com/repository/docker/paul1199/node-app']) {
                     
-                    sh "docker push ${env.BUILD_ID}"
+                    sh "docker push ${env.registry}:${env.BUILD_ID}"
                 }
             }
                    }
             }
     }
-
-def getDockerTag(){
-    def tag  = sh script: 'git rev-parse HEAD', returnStdout: true
-    return tag
-}
