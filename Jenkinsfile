@@ -3,13 +3,13 @@ pipeline {
     environment {
         registry = "https://hub.docker.com/repository/docker/paul1199/node-app"
         registryCredential = 'Docker-id'
-        dockerImage = ''
+        
     }
     stages{
         stage('Building our image') {
             steps{
                 script {
-                    dockerImage = docker.build -t registry + ":$BUILD_NUMBER"
+                    sh "docker build . -t ${env.BUILD_ID}"
                     }
                 }
               }
