@@ -9,7 +9,8 @@ pipeline {
         stage('Building our image') {
             steps{
                 script {
-                    sh "docker build . -t ${env.BUILD_ID}"
+                    def customImage = docker.build(:${env.BUILD_ID}")
+                    customImage.push()
                     }
                 }
               }
