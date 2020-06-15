@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        registry = "https://hub.docker.com/repository/docker/paul1199/kubernetes"
+        registry = "https://hub.docker.com/repository/docker/paul1199/node-app"
         registryCredential = 'Docker-id'
         
     }
@@ -10,7 +10,10 @@ pipeline {
             steps{
                 script {
                     def customImage = docker.build("${env.BUILD_ID}")
-                    customImage.push()
+                    withDockerRegistry([ credentialsId: "Docker-id", url: "https://hub.docker.com/repository/docker/paul1199/node-app" ]) {
+      // following commands will be executed within logged docker registry
+                    sh 'docker push customImage'
+   }
                     }
                 }
               }
