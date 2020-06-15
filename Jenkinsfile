@@ -14,7 +14,7 @@ pipeline {
         stage('Docker Push'){
             steps{
                 withCredentials([string(credentialsId: 'Docker-id', variable: 'Dockerid')]) {
-                    sh "docker login -u admin -p ${Docker-id} ${DOCKER_URL}"
+                    sh "docker login -u paul1199 -p ${Docker-id} ${DOCKER_URL}"
                     sh "docker push ${IMAGE_URL_WITH_TAG}"
                 }
             }
