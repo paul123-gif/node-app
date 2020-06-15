@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        registry = "https://hub.docker.com/r/docker/paul1199/node-app"
+        registry = "https://hub.docker.com/repository/docker/paul1199/node-app"
         registryCredential = 'Docker-id'
         dockerImage = ''
     }
@@ -9,7 +9,7 @@ pipeline {
         stage('Building our image') {
             steps{
                 script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    dockerImage = docker.build -t registry + ":$BUILD_NUMBER"
                     }
                 }
               }
