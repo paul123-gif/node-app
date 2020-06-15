@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        registry = "https://hub.docker.com/repository/docker/paul1199/node-app"
+        
         registryCredential = 'Docker-id'
         
     }
@@ -15,9 +15,9 @@ pipeline {
               }
         stage('Deploy our image') {
            steps{
-                withDockerRegistry([credentialsId: 'Docker-id', url: 'https://hub.docker.com/repository/docker/paul1199/node-app']) {
+                withDockerRegistry([credentialsId: 'Docker-id']) {
                     
-                    sh "docker push ${env.registry}:${env.BUILD_ID}"
+                    sh "docker push :${env.BUILD_ID}"
                 }
             }
                    }
