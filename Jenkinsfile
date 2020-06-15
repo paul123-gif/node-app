@@ -14,13 +14,12 @@ pipeline {
                 }
               }
         stage('Deploy our image') {
-            steps{
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push()
-                        }
-                       }
-                    }
+           steps{
+                withCredentials([string(credentialsId: 'Docker-id', variable: 'dockerPwd')]) {
+                    sh "docker login -u paul1199 -p ${dockerPwd}"
+                    sh "docker push paul1199/node-app:${env.BUILD_ID}"
+                }
+            }
                    }
             }
     }
